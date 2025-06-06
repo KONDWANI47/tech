@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech & Style Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --heading-font: 'Poppins', sans-serif;
+            --body-font: 'Inter', sans-serif;
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --accent-color: #2c3e50;
+            --button-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            --button-hover-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        body {
+            font-family: var(--body-font);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            width: 60px;
+            height: 60px;
+            background: rgba(52, 152, 219, 0.95);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--button-shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            overflow: hidden;
+        }
+
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.2),
+                rgba(255, 255, 255, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .back-button .material-symbols-outlined {
+            font-size: 36px;
+            font-variation-settings:
+                'FILL' 1,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 48;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+
+        .back-button.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            animation: buttonAppear 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                       pulse 2s infinite;
+        }
+
+        @keyframes buttonAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .back-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--button-hover-shadow);
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(52, 152, 219, 1);
+        }
+
+        .back-button:hover::before {
+            opacity: 1;
+        }
+
+        .back-button:hover .material-symbols-outlined {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .back-button:active {
+            transform: translateY(0) scale(0.95);
+            box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+            background: rgba(41, 128, 185, 1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .back-button:active .material-symbols-outlined {
+            transform: translateY(0);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Pulse animation */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.6);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(52, 152, 219, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+            }
+        }
+
+        .back-button.visible {
+            animation: buttonAppear 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                       pulse 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .back-button {
+                bottom: 30px;
+                left: 30px;
+                width: 54px;
+                height: 54px;
+            }
+
+            .back-button .material-symbols-outlined {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .back-button {
+                bottom: 20px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .back-button .material-symbols-outlined {
+                font-size: 28px;
+            }
+        }
+
+        .welcome-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .welcome-line {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            animation: fadeInDown 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .brand-name {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .brand-name::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #3498db, transparent);
+            animation: lineGrow 1s ease-out 0.8s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes lineGrow {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+            to {
+                width: 150px;
+                opacity: 1;
+            }
+        }
+
+        .home-sector p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-line {
+                font-size: 2rem;
+                letter-spacing: 3px;
+            }
+
+            .brand-name {
+                font-size: 3rem;
+                letter-spacing: 4px;
+            }
+
+            .brand-name::after {
+                width: 120px;
+            }
+
+            .home-sector p {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-line {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+
+            .brand-name {
+                font-size: 2.5rem;
+                letter-spacing: 3px;
+            }
+
+            .brand-name::after {
+                width: 100px;
+            }
+        }
+
+        .products-container {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .products-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            color: #fff;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #3498db, transparent);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .product-image {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(3px);
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .preview-btn {
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 30px;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        .product-card:hover .preview-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .preview-btn:hover {
+            background: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-info {
+            padding: 2rem;
+            color: #fff;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .product-description {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .order-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .order-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .order-btn:hover::before {
+            left: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .products-container {
+                padding: 3rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .product-grid {
+                gap: 2rem;
+            }
+
+            .product-image {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .product-image {
+                height: 220px;
+            }
+
+            .product-info {
+                padding: 1.5rem;
+            }
+
+            .product-info h3 {
+                font-size: 1.3rem;
+            }
+
+            .product-price {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Add styles for password field */
+        .password-field {
+            position: relative;
+        }
+
+        .password-field input {
+            padding-right: 40px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .password-toggle:hover {
+            color: #333;
+        }
+
+        /* Update form styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .form-group .error-message {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .form-group input:invalid + .error-message {
+            display: block;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="logo.jpg" alt="Tech & Style Logo">
+            </div>
+            <div class="search-container">
+                <form class="search-form">
+                    <input type="text" placeholder="Search products..." class="search-input">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!--hero section-->
+    <section class="#home" id="home">
+        <div class="home-1">
+            <div class="home-sector">
+                <h1 class="welcome-text">
+                    <span class="welcome-line">WELCOME TO</span>
+                    <span class="brand-name">TECH & STYLE</span>
+                </h1>
+                <p>Discover the perfect blend of technology and fashion</p>
+                
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h2>Featured Products</h2>
+                        <ul>
+                            <li>Premium Headsets</li>
+                            <li>Stylish Bracelets</li>
+                            <li>Tech Accessories</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="hero-images">
+                        <img src="bangle 1.jpg" alt="Premium Tech Accessories">
+                        <img src="bac.jpg" alt="Stylish Bracelets">
+                        <img src="balck2.jpg" alt="High-Quality Headsets">
+                    </div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="#products">View Products</a>
+                    <a href="#contact">Contact Us</a>
+                    <a href="about.html">About Us</a>
+                </div>
+
+                <div class="hero-features">
+                    <div class="feature">
+                        <h3>Quality Products</h3>
+                        <p>Premium materials and craftsmanship</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Fast Shipping</h3>
+                        <p>Quick delivery worldwide</p>
+                    </div>
+                    <div class="feature">
+                        <h3>24/7 Support</h3>
+                        <p>Always here to help you</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End of hero section-->
+
+    <section class="#products" id="products">
+        <div class="products-container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="product-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="balck2.jpg" alt="Smart Watch">
+                        <div class="product-overlay">
+                            <button class="preview-btn">Quick Preview</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Smart Watch Pro</h3>
+                        <p class="product-description">Advanced fitness tracking and notifications</p>
+                        <div class="product-price">K20,000.00</div>
+                        <button class="order-btn">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="bangle 1.jpg" alt="Wireless Earbuds">
+                        <div class="product-overlay">
+                            <button class="preview-btn">Quick Preview</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Wireless Earbuds</h3>
+                        <p class="product-description">Premium sound quality with noise cancellation</p>
+                        <div class="product-price">K20,000.00</div>
+                        <button class="order-btn">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="bangle 1.jpg" alt="Smart Ring">
+                        <div class="product-overlay">
+                            <button class="preview-btn">Quick Preview</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Smart Ring</h3>
+                        <p class="product-description">Track your fitness and receive notifications</p>
+                        <div class="product-price">K20,000.00</div>
+                        <button class="order-btn">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="w" alt="Wireless Charger">
+                        <div class="product-overlay">
+                            <button class="preview-btn">Quick Preview</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Fast Wireless Charger</h3>
+                        <p class="product-description">15W fast charging for all devices</p>
+                        <div class="product-price">K20,000.00</div>
+                        <button class="order-btn">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Product Card 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="bangle 1.jpg" alt="Smart Watch">
+                        <div class="product-overlay">
+                            <button class="preview-btn">Quick Preview</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Smart Watch Pro</h3>
+                        <p class="product-description">Advanced fitness tracking and notifications</p>
+                        <div class="product-price">K20,000.00</div>
+                        <button class="order-btn">Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Product Card 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="balck2.jpg" alt="Smart Watch">
+                        <div class="product-overlay">
+                            <button class="preview-btn">Quick Preview</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Smart Watch Pro</h3>
+                        <p class="product-description">Advanced fitness tracking and notifications</p>
+                        <div class="product-price">K20,000.00</div>
+                        <button class="order-btn">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- Back to Home Button -->
+    <a href="#home" class="back-button" role="button" aria-label="Back to Home">
+        <span class="material-symbols-outlined">
+            arrow_circle_up
+        </span>
+    </a>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Us</h3>
+                <p>Tech & Style is your one-stop destination for premium tech accessories and stylish jewelry. We bring together the best of technology and fashion.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=100088926574322" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/cupicsart/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/cupicsart/" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#bracelets">Bracelets</a></li>
+                    <li><a href="#wired-headsets">Wired Headsets</a></li>
+                    <li><a href="#wireless-headsets">Wireless Headsets</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section contact">
+                <h3>Contact Info</h3>
+                <ul class="contact-list">
+                    <li><i class="fas fa-map-marker-alt"></i> Area 23 Tank Tech Street,<br>Digital City</li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:mmphadzula@gmail.com">mmphadzula@gmail.com</a></li>
+                    <li><i class="fas fa-phone"></i> <a href="tel:+265985367628">+265-985-367-628</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section links">
+                <h3>ADMIN ACCESS</h3>
+                <div class="admin-buttons">
+                    <ul class="admin-links">
+                        <li><a href="admin-login.html" class="admin-link">Login</a></li>
+                        <li><a href="admin-register.html" class="admin-link">Register</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tech & Style. All rights reserved.</p>
+            </div>
+        </footer>
+
+    <script>
+        // Check if user is registered
+        function checkRegistration() {
+            const isRegistered = localStorage.getItem('isRegistered');
+            if (!isRegistered) {
+                showRegistrationForm();
+            } else {
+                // If already registered, show login form
+                showLoginForm();
+            }
+        }
+
+        // Show registration form
+        function showRegistrationForm() {
+            const form = document.getElementById('registrationForm');
+            form.style.display = 'block';
+            // Hide login form if it's visible
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.style.display = 'none';
+            }
+        }
+
+        // Show login form
+        function showLoginForm() {
+            const form = document.getElementById('loginForm');
+            if (form) {
+                form.style.display = 'block';
+            }
+            // Hide registration form
+            const regForm = document.getElementById('registrationForm');
+            if (regForm) {
+                regForm.style.display = 'none';
+            }
+        }
+
+        // Registration form handling
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const defaultPassword = 'cupicsart@98ART';
+
+            // Store user data with default password
+            const userData = {
+                name,
+                email,
+                phone,
+                address,
+                password: defaultPassword,
+                isAdmin: true // Set admin status
+            };
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+            localStorage.setItem('isRegistered', 'true');
+
+            // Show success message with password
+            alert('Registration successful!\nYour default password is: cupicsart@98ART\nPlease change it after your first login.');
+            
+            // Redirect to admin dashboard
+            window.location.href = 'admin-dashboard.html';
+        });
+
+        // Login form handling
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const userData = JSON.parse(localStorage.getItem('userData'));
+
+            if (!userData) {
+                alert('Please register first!');
+                showRegistrationForm();
+                return;
+            }
+
+            if (userData.email === email && userData.password === password) {
+                // Redirect to admin dashboard
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                alert('Invalid email or password!');
+            }
+        });
+
+        // Close modal when clicking the X
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('registrationForm').style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('registrationForm');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Check registration status on page load
+        window.onload = checkRegistration;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            let currentSlide = 0;
+
+            function updateSlides() {
+                slides.forEach((slide, index) => {
+                    if (index === currentSlide) {
+                        slide.classList.add('active');
+                        dots[index].classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                        dots[index].classList.remove('active');
+                    }
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlides();
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                updateSlides();
+            }
+
+            // Event listeners
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    updateSlides();
+                });
+            });
+
+            // Auto slide
+            setInterval(nextSlide, 5000);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const productsLink = document.querySelector('.products-link');
+            const dropdown = document.querySelector('.dropdown');
+            
+            productsLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.products-link') && !e.target.closest('.dropdown')) {
+                    dropdown.style.display = 'none';
+                }
+            });
+        });
+
+        // Hamburger Menu Functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Back to Home button visibility and smooth scroll
+        const backButton = document.querySelector('.back-button');
+        let lastScrollTop = 0;
+
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 300) {
+                backButton.classList.add('visible');
+            } else {
+                backButton.classList.remove('visible');
+            }
+
+            // Add extra animation when scrolling up
+            if (scrollTop < lastScrollTop) {
+                backButton.style.transform = 'translateY(0)';
+            }
+
+            lastScrollTop = scrollTop;
+        });
+
+        // Smooth scroll to home
+        backButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const homeSection = document.querySelector('#home');
+            
+            // Smooth scroll with easing
+            const scrollToTop = () => {
+                const currentPosition = window.pageYOffset;
+                if (currentPosition > 0) {
+                    window.requestAnimationFrame(scrollToTop);
+                    window.scrollTo(0, currentPosition - currentPosition / 8);
+                }
+            };
+            
+            scrollToTop();
+        });
+
+        // Add hover effect for touch devices
+        if ('ontouchstart' in window) {
+            backButton.addEventListener('touchstart', () => {
+                backButton.style.transform = 'translateY(-5px)';
+            });
+            
+            backButton.addEventListener('touchend', () => {
+                backButton.style.transform = 'translateY(0)';
+            });
+        }
+
+        // Add click event listeners for preview buttons
+        document.querySelectorAll('.preview-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productCard = this.closest('.product-card');
+                const productName = productCard.querySelector('h3').textContent;
+                alert(`Preview for ${productName} coming soon!`);
+            });
+        });
+
+        // Add click event listeners for order buttons
+        document.querySelectorAll('.order-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productCard = this.closest('.product-card');
+                const productName = productCard.querySelector('h3').textContent;
+                const productPrice = productCard.querySelector('.product-price').textContent;
+                alert(`Order placed for ${productName} - ${productPrice}`);
+            });
+        });
+    </script>
+
+    <script src="script.js"></script>
+
+    <!-- Registration Form -->
+    <div id="registrationForm" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Register</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" required>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="loginFormContent">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        /* Add styles for login form */
+        #loginForm .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        #loginForm .form-group {
+            margin-bottom: 1rem;
+        }
+
+        #loginForm .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        #loginForm .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        #loginForm button[type="submit"] {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        #loginForm button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+    </style>
+</body>
+</html> 
